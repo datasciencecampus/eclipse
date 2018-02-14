@@ -1,9 +1,12 @@
 ********************************************************************************
 * set up...
 
+*need to install weaver to print markdoc files
+ssc install weaver
+
 set linesize 80
 set more off, perm
-set scheme burd
+*set scheme burd
 
 * need to create global filepath mypath for local ECLIPSE folder
 cd `"${mypath}ECLIPSE"'
@@ -71,10 +74,10 @@ do "ndns data - explore.do"
 * univariate analysis on the predictor variables
 * variable selection via bootstrap
 * variable selection - check for colineariaty
+* run bootsrap simulator (set up before main analysis)			
 
 do "ndns data - analysis.do"
 
-* run bootsrap simulator (set up before main analysis - with initial config?)			
 
 
 *-------------------------------------------------------------------------------
@@ -85,7 +88,7 @@ do "ndns data - analysis.do"
 log close
  
 * print log	and outputs to pdf
-markdoc "ndns data", export(pdf) replace install title("ECLIPSE")
+*markdoc "ndns data", export(pdf) replace install title("ECLIPSE")
 
 ********************************************************************************
 ********************************************************************************

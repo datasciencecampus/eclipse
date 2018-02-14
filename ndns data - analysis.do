@@ -530,7 +530,9 @@ img, title("self-reported and adjusted EI over study years") width(270)
 
 /**/ qui         log close
 
-markdoc "ndns data - analysis", export(pdf) replace install title("ECLIPSE")
+do `"${mypath}ECLIPSE/ndns data - bootstrap coefficients.do"'
+
+* markdoc "ndns data - analysis", export(pdf) replace install title("ECLIPSE")
 
 ********************************************************************************
 							

@@ -9,7 +9,8 @@ The UK Data Service. https://www.ukdataservice.ac.uk/
 The analysis made use of bio-metric data collected for a sub-sample of NDNS participants which provided an objective estimate of energy expended, measured using Doubly Labeled Water. This was compared with individual energy intake estimates and percentage difference was calculated and modelled using demograohic and anthropomorphic characteristics.
 
 This repo contains the code used to for the data analysis. All analysis was carried out using STATA 14.
-The master.do file should be used to set up the analysis, including the installation of required programs.
+The master.do file should be used to set up the analysis, including the installation of required programs. Weaver is required to print markdoc files of
+output embedded in code. https://github.com/haghish/weaver.
 The code makes use of a file path which points to a local folder containing the code and data folder from the UK Data Service,
 this should be set using a global macro named 'mypath'.
 

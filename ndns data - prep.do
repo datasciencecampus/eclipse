@@ -1,6 +1,5 @@
 //ON
 cd `"${mypath}ECLIPSE"'
-*qui log using test1, replace 
 
 /***
 ### Data

@@ -102,7 +102,7 @@ twoway  (hist energykcal    if agegr2==1 & sex==2, percent ///
 graph combine   "graph - histogram - sr ei - adults - altax" ///               
                 "graph - hbox - sr ei - adults" ///
                 , col(1) xcomm
-*********** cimbined chart axis not aligned, needs formatting
+*********** combined chart axis not aligned, needs formatting
 
 
 
@@ -510,6 +510,6 @@ foreach i of var age height_m weight bmi2 energykcal {
 qui log close
 
 
-markdoc `"/${mypath}ECLIPSE/UKDA-6533-tab/tab/ndns data - explore"', export(pdf) replace install title("ECLIPSE")
+*markdoc `"/${mypath}ECLIPSE/UKDA-6533-tab/tab/ndns data - explore"', export(pdf) replace install title("ECLIPSE")
 
 
