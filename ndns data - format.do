@@ -1,6 +1,6 @@
 //OFF
-cd  `"${mypath}ECLIPSE/ndns data dlw vs self reported"'
-qui log using test1, append 
+cd  `"${mypath}ECLIPSE/UKDA-6533-tab/tab"'
+*qui log using test1, append 
 
 use "ndns_data_yr1-6_dietaryandperson_data - raw.dta"
 
@@ -12,99 +12,100 @@ use "ndns_data_yr1-6_dietaryandperson_data - raw.dta"
 			
 
 
-lab     var     seriali         "person id"
-lab     var     surveyyr        "year"
+lab var seriali     "person id"
+lab var surveyyr    "year"
 
-lab     define  lbl_year ///
-                1 "2008" ///
-                2 "2009" ///
-                3 "2011" ///
-                4 "2012" ///
-                5 "2013" ///
-                6 "2014"
+lab de  lbl_year ///
+        1 "2008" ///
+        2 "2009" ///
+        3 "2011" ///
+        4 "2012" ///
+        5 "2013" ///
+        6 "2014"
 
-lab     val     surveyyr ///
-                lbl_year
+lab val surveyyr ///
+        lbl_year
 
-lab		var 	agegr2 			"age group"			
+lab var age         "age (years)"
+lab var agegr2      "age group"			
 		
-lab		define 	lbl_agegr2 ///
-				1 "adults" ///
-				2 "children", replace
+lab de  lbl_agegr2 ///
+        1 "adults" ///
+        2 "children", replace
 				
-lab		val 	agegr2 ///
-				lbl_agegr2			
+lab val agegr2 ///
+        lbl_agegr2			
 		
-lab 	define 	lbl_agegr1 	///
-				1 "1.5-3 years" ///
-				2 "4-10 years" ///
-				3 "11-18 years" ///
-				4 "19-64 years" ///
-				5 "65+ years"
+lab de  lbl_agegr1 	///
+        1 "1.5-3 years" ///
+        2 "4-10 years" ///
+        3 "11-18 years" ///
+        4 "19-64 years" ///
+        5 "65+ years"
 
-lab 	val 	agegr1 ///
-				lbl_agegr1	
+lab val agegr1 ///
+        lbl_agegr1	
 		
-lab 	define 	lbl_agegad2	///
-				-1 "<16" ///
-				1 "16-18" ///
-				2 "19-34" ///
-				3 "35-49" ///
-				4 "50-64" ///
-				5 "65+ years", replace 
+lab de  lbl_agegad2	///
+        -1 "<16" ///
+        1 "16-18" ///
+        2 "19-34" ///
+        3 "35-49" ///
+        4 "50-64" ///
+        5 "65+ years", replace 
 		
-lab 	val 	agegad2 ///
-				lbl_agegad2
+lab val agegad2 ///
+        lbl_agegad2
 
 gen     age_grp = int(age/5)
 replace age_grp = 17 if age_grp>17
 
-la      def     lbl_age_grp ///
-                0 "0-4" ///
-                1 "5-9" ///
-                2 "10-14" ///
-                3 "15-19" ///
-                4 "20-24" ///
-                5 "25-29" ///
-                6 "30-34" ///
-                7 "35-39" /// 
-                8 "40-44" ///
-                9 "45-49" ///
-                10 "50-54" ///
-                11 "55-59" ///
-                12 "60-64" ///
-                13 "65-69" ///
-                14 "70-74" ///
-                15 "75-79" /// 
-                16 "80-84" ///
-                17 "85+" 
+la  def lbl_age_grp ///
+        0 "0-4" ///
+        1 "5-9" ///
+        2 "10-14" ///
+        3 "15-19" ///
+        4 "20-24" ///
+        5 "25-29" ///
+        6 "30-34" ///
+        7 "35-39" /// 
+        8 "40-44" ///
+        9 "45-49" ///
+        10 "50-54" ///
+        11 "55-59" ///
+        12 "60-64" ///
+        13 "65-69" ///
+        14 "70-74" ///
+        15 "75-79" /// 
+        16 "80-84" ///
+        17 "85+" 
 
-la val age_grp lbl_age_grp
+la val  age_grp ///
+        lbl_age_grp
 
-lab 	define	lbl_sex ///
-				1 "males" ///
-				2 "females"
+la de   lbl_sex ///
+        1 "males" ///
+        2 "females"
 
-lab		val 	sex ///
-				lbl_sex
+lab	val sex ///
+        lbl_sex
 
-lab		var		htval			"height (validated)"
-lab		var		wtval			"weight (validated)"
+lab var htval       "height (validated)"
+lab	var	wtval       "weight (validated)"
 
-lab     var     height          "height (cm)"
-lab     var     weight          "weight (kg)"
+lab var height      "height (cm)"
+lab var weight      "weight (kg)"
 
 gen     height_m = height/100
 replace height_m = . if height==-1
-la var  height_m "height (mtrs)"
 
-
-la var	bmival "BMI (validated)"
+la  var height_m    "height (mtrs)"
+la  var bmival      "BMI (validated)"
 
 ** create BMI from height and weight
 
-lab 	var		bmivg5			"BMI groups (adults only)"
-        recode 	bmivg5 	-1=99
+lab var bmivg5      "BMI groups (adults only)"
+recode 	bmivg5 	    -1=99
 
 la de   lbl_bmivg5 ///
 		1 "<18.5" ///
@@ -114,7 +115,7 @@ la de   lbl_bmivg5 ///
 		5 "40+" ///
 		99 "null", replace
 		
-la val   bmivg5 ///
+la val  bmivg5 ///
         lbl_bmivg5
 
 gen     bmi2 =(weight)/(height_m^2)
@@ -144,7 +145,7 @@ In this context, EE is considered a proxy for the true EI.
 
 
 
-la var  energykcal  "reported intake kcal" /*inc alcohol*/
+la var  energykcal "self-reported energy intake (kcals)" /*inc alcohol*/
 //OFF
 format  energykcal %9.0f
 
@@ -159,7 +160,7 @@ gen     morethanear = 0
 replace morethanear = 1 if energykcal>=ekcalear
 la var  morethanear "reported kcals greater than EAR (0=no)"
 
-la var  tee     "measured expend kj"
+la var  tee         "measured expend kj"
 
 cou if  tee!=-4 ///
         & tee!=-1 ///
@@ -178,9 +179,9 @@ use 29/7 instead
 
 	
 gen		tee_kcal = tee/(29/7)
-        replace tee_kcal =. if dlw_grp==0
+        replace tee_kcal =. if tee==-4 | tee==-1 | tee==.
 
-la var	tee_kcal "measured expend kcal"
+la var	tee_kcal "measured energy expend (kcals)"
 
 //OFF
 
@@ -206,7 +207,7 @@ kcals converted from energy intake in kj - probably conversion rate
 
 //ON
 gen     dlw_grp = 0
-replace dlw_grp = 1 if  tee!=-4 & tee!=-1 & tee!=.     
+replace dlw_grp = 1 if tee!=-4 & tee!=-1 & tee!=.     
 
 la var  dlw_grp "included in DLW sample sub-group"
 
@@ -318,13 +319,13 @@ also allows comparison between IndEI from ndns data and PAL from other sources
 ***/
 
 
-la var  pal	"physical activity level"
+la var  pal	            "physical activity level"
 
-gen		energy_ind  =energykj/bmr_crc
-la var	energy_ind  "energy intake index"
+gen		energy_ind = energykj/bmr_crc
+la var	energy_ind      "energy intake index"
 
 gen     lg_energy_ind = log(energy_ind)
-la var  lg_energy_ind "log(energy index)"		
+la var  lg_energy_ind   "log(energy index)"		
 
 /***
 
@@ -347,7 +348,7 @@ replace energy_ind_pl =0 if energy_ind<1
 replace energy_ind_pl =0 if energy_ind>2.8 & sex==2
 replace energy_ind_pl =0 if energy_ind>3.5 & sex==1
 
-la var  energy_ind_pl "plausible self-report"	
+la var  energy_ind_pl       "plausible self-report"	
 
 la de   lbl_energy_plc ///
         0 "not plausible" ///
@@ -376,16 +377,17 @@ gen     pond_ind = 100*(weight^(1/3))/height
 
 * new variables created after predicting model
 
-gen new_EI=.
+gen     new_EI=.
+la var  new_EI              "adjusted energy intake (kcals)"
 
 gen     new_energy_ind=.
-la var      new_energy_ind "energy index"
+la var  new_energy_ind      "new energy index"
 
-gen		new_energy_ind_pl			=.
-lab		var		new_energy_ind_pl	"plausible self-report"	
+gen		new_energy_ind_pl=.
+lab var new_energy_ind_pl	"new plausible self-report"	
 
-lab     val     new_energy_ind_pl ///
-                lbl_energy_ind_pl
+lab val new_energy_ind_pl ///
+        lbl_energy_ind_pl
 
 
 //OFF	
@@ -410,12 +412,12 @@ order 	seriali ///
 		energy_ind_pl ///
 		, first
 
-sort age_grp sex 
+sort    age_grp sex 
 
 				
 save 	"ndns_data_yr1-6_dietaryandperson_data.dta", replace
 
-export delim using "ndns_data_yr1-6_dietaryandperson_data.csv", replace
+export  delim using "ndns_data_yr1-6_dietaryandperson_data.csv", replace
 
 
 

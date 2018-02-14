@@ -1,6 +1,6 @@
 //ON
-cd `"${mypath}ECLIPSE/ndns data dlw vs self reported"'
-qui log using test1, replace 
+cd `"${mypath}ECLIPSE"'
+*qui log using test1, replace 
 
 /***
 ### Data
@@ -22,17 +22,15 @@ cd 	`"${mypath}ECLIPSE/UKDA-6533-tab/tab"'
 * append data from yrs5-6 to yrs1-4
 
 
-import delim "ndns_rp_yr5-6a_indiv.tab"
-
-    save "ndns_rp_yr5-6a_indiv.dta", replace
+import  delim "ndns_rp_yr5-6a_indiv.tab"
+        save "ndns_rp_yr5-6a_indiv.dta", replace
         clear
 
 
 import 	delim 	"ndns_rp_yr1-4a_indiv_uk.tab"   
+        save "ndns_rp_yr1-4a_indiv_uk.dta", replace
     
-    save "ndns_rp_yr1-4a_indiv_uk.dta", replace
-    
-    append using "ndns_rp_yr5-6a_indiv.dta", force
+        append using "ndns_rp_yr5-6a_indiv.dta", force
 		
         keep	seriali surveyyr tee teerep_kj_day_1   bmr_kj_day_1 ///
                 pal htval wtval bmival agegad1 bmivg5 ///
@@ -45,33 +43,30 @@ import 	delim 	"ndns_rp_yr1-4a_indiv_uk.tab"
                 hhinc  mcclem  eqvinc 		
        
         save 	"ndns_data_yr1-6_person_data.dta", replace
-   
-    clear
+        clear
 
 * import individual level dietary data - includes avg daily kcal intake
 * append data from yrs5-6 to yrs 1-4
 
 import 	delim 	"ndns_rp_yr5-6a_personleveldietarydata.tab"
-    
-    save "ndns_rp_yr5-6a_personleveldietarydata_uk.dta", replace
+        save "ndns_rp_yr5-6a_personleveldietarydata_uk.dta", replace
         clear
 	
 import 	delim 	"ndns_rp_yr1-4a_personleveldietarydata_uk.tab"
-    
-    save "ndns_rp_yr1-4a_personleveldietarydata_uk.dta", replace
+        save "ndns_rp_yr1-4a_personleveldietarydata_uk.dta", replace
 
-    append using "ndns_rp_yr5-6a_personleveldietarydata_uk.dta", force
+        append using "ndns_rp_yr5-6a_personleveldietarydata_uk.dta", force
 
 * merge dietary data with person level data 
 * save in project working directory
 
 merge 	1:1 seriali using "ndns_data_yr1-6_person_data.dta", force
 			
-    cd `"${mypath}ECLIPSE/ndns data dlw vs self reported"'
-      save 	"ndns_data_yr1-6_dietaryandperson_data - raw.dta", replace
+        cd `"${mypath}ECLIPSE/UKDA-6533-tab/tab"'
+        save "ndns_data_yr1-6_dietaryandperson_data - raw.dta", replace
         *clear
 
-qui log close
+* qui log close
 
 /***
 
@@ -98,7 +93,7 @@ tab 	agegr1, miss nolab
 tab 	agegr2 agegr1  /* agegr2: 1 = adults >18 */
 //ON
 txt "Records for individuals aged 4 years and over were extracted " ///
-     "from the NDNS data."
+    "from the NDNS data."
 //OFF
 cou if  agegr1==1
 
@@ -129,23 +124,23 @@ txt "After excluding records with missing values for height and weight, " ///
     "the total number of records was n=`r(N)'" 
 //OFF
 
-count if dlw_grp==1
+count if  tee!=-4 & tee!=-1 & tee!=. 
 scalar  dlw1=`r(N)'
-count if dlw_grp==0
+count if tee!=-4 & tee!=-1 & tee!=.
 scalar dlw0=`r(N)'
 
 //ON 
  
 txt "Data was divided into a training dataset comprised of" ///
-    "the DLW sub group used to develop the models (n= " dlw1 ")" ///
-    " and a test dataset of the remaining individuals (n= " dlw0 ")"
+    "the DLW sub group used to develop the models (n= " dlw1 ") " ///
+    "and a test dataset of the remaining individuals (n= " dlw0 ")"
 
 //OFF
 
-save 	"ndns_data_yr1-6_dietaryandperson_data - raw.dta", replace
+* save 	"ndns_data_yr1-6_dietaryandperson_data - raw.dta", replace
 
 
-*qui log close
+qui log close
 
 
 

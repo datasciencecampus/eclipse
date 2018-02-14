@@ -1,3 +1,5 @@
+cd `"${mypath}ECLIPSE/Outputs"'
+
 * simulate errors
 
 

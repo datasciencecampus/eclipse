@@ -1,5 +1,6 @@
-cd `"${mypath}ECLIPSE/ndns data dlw vs self reported"'
+cd `"${mypath}ECLIPSE/Outputs"'
 
+clear
 * initialise simulated dataset
 * based on age and gender distributions as per eurostat 2013
         input age_grp
