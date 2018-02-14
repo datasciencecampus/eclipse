@@ -225,10 +225,9 @@ xi: stepwise, pr(0.05): reg     kcal_diff_pcnt ///
 /**/ ///
                 xi:     reg     kcal_diff_pcnt ///
                                 energykcal ///
-                                ib2.agegad2 weight i.sex ///
+                                age weight i.sex ///
                                 if dlw_grp==1 & agegr2==1
 
-**** need to swap out age!!!!!!!! - currentlt final model
 
 //ON
 * final model ******************************************************************
